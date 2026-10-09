@@ -12,19 +12,17 @@
   </properties>
 
   <repositories>
-    <!-- Updated legacy repository endpoint -->
     <repository>
       <id>papermc</id>
       <url>https://papermc.io</url>
     </repository>
     <repository>
       <id>codemc-repo</id>
-      <url>https://codemc.io</url>
+      <url>https://codemc.org</url>
     </repository>
   </repositories>
 
   <dependencies>
-    <!-- Fallback stable API library for 1.12.2 Spigot/Paper compilation -->
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
