@@ -17,8 +17,8 @@ cat << 'EOF' > pom.xml
   </properties>
   <repositories>
     <repository>
-      <id>spigotmc-repo</id>
-      <url>https://spigotmc.org</url>
+      <id>codemc-repo</id>
+      <url>https://codemc.org</url>
     </repository>
   </repositories>
   <dependencies>
