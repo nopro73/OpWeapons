@@ -1,0 +1,6 @@
+name: OpWeapons
+version: 1.0
+main: com.nopro73.opweapons.OpWeapons
+api-version: 1.8
+description: Adds custom recipes for heart weapons!
+author: nopro73
