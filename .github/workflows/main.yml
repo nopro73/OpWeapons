@@ -17,11 +17,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Compile Main Root Project Only
-      run: mvn -B clean package --file pom.xml
+    - name: Build with Maven Anywhere
+      run: |
+        POM_PATH=$(find . -name "pom.xml" | head -n 1)
+        echo "Found pom.xml at: $POM_PATH"
+        mvn -B clean package --file "$POM_PATH"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: HeartWeapons-Plugin
-        path: target/*.jar
+        path: "**/target/*.jar"
