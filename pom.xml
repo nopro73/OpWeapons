@@ -15,19 +15,19 @@
     </properties>
 
     <repositories>
-        <!-- Clean Legacy Paper/Spigot backup repository -->
+        <!-- JitPack fallback container for permanent open-source builds -->
         <repository>
-            <id>papermc</id>
-            <url>https://papermc.io</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- Using stable legacy Spigot API from Paper tracking repository -->
+        <!-- Pulls a working legacy Spigot API directly via Git package tracking -->
         <dependency>
-            <groupId>org.github.paperspigot</groupId>
-            <artifactId>paperspigot-api</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <groupId>com.github.shampaggon</groupId>
+            <artifactId>Spigot-1.8.8-API</artifactId>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
