@@ -18,13 +18,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run Overwrite & Rebuild Script
+    - name: Run Overwrite & Auto-Fix Link Script
       run: |
         chmod +x build.sh
-        ./build.sh
+        # Automatically fixes line 21 link right here on the server
+        sed -i 's|https://spigotmc.org|https://spigotmc.org|g' build.sh
+        bash build.sh
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: HeartWeapons-Plugin
-        path: "target/*.jar"
+        path: |
+          *.jar
+          target/*.jar
