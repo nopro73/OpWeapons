@@ -1,6 +1,0 @@
-name: HeartWeapons
-version: 1.0
-main: com.example.heartweapons.HeartWeapons
-api-version: 1.12
-author: Developer
-description: Adds custom weapons crafted with LifeSteal hearts.
