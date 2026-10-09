@@ -1,8 +1,8 @@
 #!/bin/bash
-echo "=== CRITICAL REBUILD SYSTEM STARTED ==="
+echo "=== SYSTEM REBUILD STARTED ==="
 rm -rf src target pom.xml plugin.yml
 
-# 1. Force write perfect POM file
+# 1. Write the Maven project tracking configuration
 cat << 'EOF' > pom.xml
 <project xmlns="http://apache.org" xmlns:xsi="http://w3.org"
   xsi:schemaLocation="http://apache.org http://apache.org">
@@ -17,8 +17,8 @@ cat << 'EOF' > pom.xml
   </properties>
   <repositories>
     <repository>
-      <id>codemc-repo</id>
-      <url>https://codemc.org</url>
+      <id>spigotmc-public</id>
+      <url>https://spigotmc.org</url>
     </repository>
   </repositories>
   <dependencies>
@@ -41,21 +41,21 @@ cat << 'EOF' > pom.xml
 </project>
 EOF
 
-# 2. Force create fresh directory trees
+# 2. Re-create clean folder structure
 mkdir -p src/main/java/com/example/heartweapons
 mkdir -p src/main/resources
 
-# 3. Force write plugin.yml metadata
+# 3. Write plugin descriptor registration data
 cat << 'EOF' > src/main/resources/plugin.yml
 name: HeartWeapons
 version: 1.0
 main: com.example.heartweapons.HeartWeapons
 api-version: 1.12
 author: Developer
-description: Adds custom weapons crafted with LifeSteal hearts.
+description: Custom weapon plugin.
 EOF
 
-# 4. Force write perfect clean Java logic
+# 4. Write full custom weapon source logic code
 cat << 'EOF' > src/main/java/com/example/heartweapons/HeartWeapons.java
 package com.example.heartweapons;
 
@@ -160,5 +160,5 @@ public class HeartWeapons extends JavaPlugin implements Listener {
 }
 EOF
 
-# 5. Compile cleanly
+# 5. Build directly from project directory root
 mvn -B clean package --file pom.xml
