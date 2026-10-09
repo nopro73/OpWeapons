@@ -2,14 +2,12 @@ package com.example.heartweapons;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -35,13 +33,13 @@ public class HeartWeapons extends JavaPlugin implements Listener {
         registerRecipes();
     }
 
+    @SuppressWarnings("deprecation")
     private void registerRecipes() {
-        // Define GreatLifeSteal heart blueprint item matching your server setup
-        // Note: Change Material.NETHER_STAR to your exact config heart item if different
+        // Base setup for the GreatLifeSteal heart item definition
         ItemStack heartItem = new ItemStack(Material.NETHER_STAR); 
         ItemMeta heartMeta = heartItem.getItemMeta();
         if (heartMeta != null) {
-            heartMeta.setDisplayName("§cHeart"); // Matches GreatLifeSteal default string colors
+            heartMeta.setDisplayName("§cHeart");
             heartItem.setItemMeta(heartMeta);
         }
 
@@ -54,10 +52,10 @@ public class HeartWeapons extends JavaPlugin implements Listener {
             customBow.setItemMeta(bowMeta);
         }
 
-        NamespacedKey bowKey = new NamespacedKey(this, "heart_bow");
-        ShapedRecipe bowRecipe = new ShapedRecipe(bowKey, customBow);
+        // Using safe legacy 1.12 recipe registration without requiring NamespacedKey constructors
+        ShapedRecipe bowRecipe = new ShapedRecipe(customBow);
         bowRecipe.shape("HHH", "HBH", "HHH");
-        bowRecipe.setIngredient('H', heartItem.getData());
+        bowRecipe.setIngredient('H', Material.NETHER_STAR);
         bowRecipe.setIngredient('B', Material.BOW);
         Bukkit.addRecipe(bowRecipe);
 
@@ -70,14 +68,15 @@ public class HeartWeapons extends JavaPlugin implements Listener {
             customSword.setItemMeta(swordMeta);
         }
 
-        NamespacedKey swordKey = new NamespacedKey(this, "heart_sword");
-        ShapedRecipe swordRecipe = new ShapedRecipe(swordKey, customSword);
+        ShapedRecipe swordRecipe = new ShapedRecipe(customSword);
+        swordRecipe.shape("HHH", "HcontentH", "HHH");
         swordRecipe.shape("HHH", "HSH", "HHH");
-        swordRecipe.setIngredient('H', heartItem.getData());
+        swordRecipe.setIngredient('H', Material.NETHER_STAR);
         swordRecipe.setIngredient('S', Material.DIAMOND_SWORD);
         Bukkit.addRecipe(swordRecipe);
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler
     public void onBowHit(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Arrow) {
@@ -91,12 +90,13 @@ public class HeartWeapons extends JavaPlugin implements Listener {
                     
                     LivingEntity target = (LivingEntity) event.getEntity();
                     PotionEffectType randomEffect = negativeEffects[random.nextInt(negativeEffects.length)];
-                    target.addPotionEffect(new PotionEffect(randomEffect, 200, 0)); // 200 ticks = 10s
+                    target.addPotionEffect(new PotionEffect(randomEffect, 200, 0));
                 }
             }
         }
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler
     public void onSwordHit(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
@@ -107,11 +107,7 @@ public class HeartWeapons extends JavaPlugin implements Listener {
                 sword.getItemMeta().getDisplayName().equals("§4Heart Infused Blade")) {
                 
                 LivingEntity target = (LivingEntity) event.getEntity();
-                
-                // Override to deal 10 flat base damage (5 Hearts)
                 event.setDamage(10.0);
-                
-                // Add Poison II (Amplifier 1) for 5 seconds (100 ticks)
                 target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
             }
         }
