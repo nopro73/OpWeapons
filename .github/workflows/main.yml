@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
 
@@ -18,19 +19,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Clean and Force Rebuild Project Root
-      run: |
-        # Make sure the script file is fully updated on the server
-        chmod +x build.sh
-        bash build.sh
-        
-        # Override the broken mirror link and compile using the clean public nexus hub endpoint
-        mvn -B clean package -Dmaven.repo.local=.m2/repository -Drepo.url=https://spigotmc.org --file pom.xml
+    - name: Compile and Package with Maven
+      run: mvn clean package
 
-    - name: Upload Build Artifact
+    - name: Upload Finished Jar Asset
       uses: actions/upload-artifact@v4
       with:
         name: HeartWeapons-Plugin
-        path: |
-          *.jar
-          target/*.jar
+        path: target/*.jar
