@@ -17,14 +17,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build with Maven Anywhere
+    - name: Run Overwrite & Rebuild Script
       run: |
-        POM_PATH=$(find . -name "pom.xml" | head -n 1)
-        echo "Found pom.xml at: $POM_PATH"
-        mvn -B clean package --file "$POM_PATH"
+        chmod +x build.sh
+        ./build.sh
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: HeartWeapons-Plugin
-        path: "**/target/*.jar"
+        path: target/*.jar
