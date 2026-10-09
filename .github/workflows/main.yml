@@ -18,12 +18,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run Overwrite & Auto-Fix Link Script
+    - name: Clean and Force Rebuild Project Root
       run: |
+        # Make sure the script file is fully updated on the server
         chmod +x build.sh
-        # Automatically fixes line 21 link right here on the server
-        sed -i 's|https://spigotmc.org|https://spigotmc.org|g' build.sh
         bash build.sh
+        
+        # Override the broken mirror link and compile using the clean public nexus hub endpoint
+        mvn -B clean package -Dmaven.repo.local=.m2/repository -Drepo.url=https://spigotmc.org --file pom.xml
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
