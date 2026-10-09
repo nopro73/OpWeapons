@@ -35,7 +35,7 @@ public class HeartWeapons extends JavaPlugin implements Listener {
 
     @SuppressWarnings("deprecation")
     private void registerRecipes() {
-        // Core configuration matching GreatLifeSteal heart data specs
+        // Base setup for the GreatLifeSteal heart item definition
         ItemStack heartItem = new ItemStack(Material.NETHER_STAR); 
         ItemMeta heartMeta = heartItem.getItemMeta();
         if (heartMeta != null) {
