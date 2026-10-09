@@ -35,7 +35,7 @@ public class HeartWeapons extends JavaPlugin implements Listener {
 
     @SuppressWarnings("deprecation")
     private void registerRecipes() {
-        // Base setup for the GreatLifeSteal heart item definition
+        // Core configuration matching GreatLifeSteal heart data specs
         ItemStack heartItem = new ItemStack(Material.NETHER_STAR); 
         ItemMeta heartMeta = heartItem.getItemMeta();
         if (heartMeta != null) {
@@ -52,7 +52,6 @@ public class HeartWeapons extends JavaPlugin implements Listener {
             customBow.setItemMeta(bowMeta);
         }
 
-        // Using safe legacy 1.12 recipe registration without requiring NamespacedKey constructors
         ShapedRecipe bowRecipe = new ShapedRecipe(customBow);
         bowRecipe.shape("HHH", "HBH", "HHH");
         bowRecipe.setIngredient('H', Material.NETHER_STAR);
@@ -69,7 +68,6 @@ public class HeartWeapons extends JavaPlugin implements Listener {
         }
 
         ShapedRecipe swordRecipe = new ShapedRecipe(customSword);
-        swordRecipe.shape("HHH", "HcontentH", "HHH");
         swordRecipe.shape("HHH", "HSH", "HHH");
         swordRecipe.setIngredient('H', Material.NETHER_STAR);
         swordRecipe.setIngredient('S', Material.DIAMOND_SWORD);
