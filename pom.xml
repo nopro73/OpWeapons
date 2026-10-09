@@ -15,28 +15,18 @@
     </properties>
 
     <repositories>
-        <!-- Working Spigot Legacy Fallback Repository -->
+        <!-- Clean Legacy Paper/Spigot backup repository -->
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://spigotmc.org</url>
+            <id>papermc</id>
+            <url>https://papermc.io</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- Verified Legacy Spigot API dependency mapping -->
+        <!-- Using stable legacy Spigot API from Paper tracking repository -->
         <dependency>
-            <groupId>com.github.MilkBowl</groupId>
-            <artifactId>VaultAPI</artifactId>
-            <version>1.7</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
+            <groupId>org.github.paperspigot</groupId>
+            <artifactId>paperspigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
